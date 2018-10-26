@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<HTML>
+    <head>
+        <title>Skin Deep</title>
+        <script src="js/renderers/CanvasRenderer.js"></script>
+        <script src="js/renderers/Projector.js"></script> 
+        <script src="build/three.js"></script> 
+    </head>
+    <body>
+        <script>
+            const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const scene = new THREE.Scene(); 
+            const renderer = new THREE.WebGLRenderer();
+            const OBJLoader = new THREE.OBJLoader();
+            init();
+            let init = () =>{
+                //Scene set up
+                scene.add(box);
+
+                //Dom set up
+                document.body.appendChild(renderer.domElement);
+
+                //Testing env 
+                let cube = new THREE.BoxGeometry(10, 10, 10);
+                let cubeMat = new THREE.MeshNormalMaterial();
+                let box = new THREE.Mesh(cube, cubeMat);
+                
+                //Loding Models
+                //Render set up 
+                renderer.setClearColor(0x000000, 1.0);
+                renderer.setSize(window.innerWidth / window.innerHeight);
+                render();
+            }
+            let render = () =>{
+                renderer.render(scene, camera);
+                requestAnimationFrame(render);
+            }
+        </script> 
+    </body>
+
+
